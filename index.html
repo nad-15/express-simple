@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front End</title>
+</head>
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #0d1117;
+        /* Dark GitHub-style background */
+        color: #e6edf3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #58a6ff;
+        text-shadow: 0 0 10px rgba(88, 166, 255, 0.3);
+    }
+
+    form {
+        background: #161b22;
+        padding: 30px;
+        border-radius: 12px;
+        border: 1px solid #30363d;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 320px;
+    }
+
+    .form-group {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    label {
+        flex: 1;
+        color: #8b949e;
+        font-size: 0.9rem;
+    }
+
+    input {
+        background: #0d1117;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        padding: 12px;
+        color: #e6edf3;
+        font-size: 0.9rem;
+        transition: border-color 0.2s;
+
+        flex: 3;
+        width: 0;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #58a6ff;
+        box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
+    }
+
+    button {
+        background-color: #238636;
+        /* Success green */
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        margin-top: 10px;
+    }
+
+    button:hover {
+        background-color: #2ea043;
+    }
+
+    button:active {
+        transform: scale(0.98);
+    }
+
+    /* Quick label placeholder logic */
+    #senderName::placeholder {
+        color: #8b949e;
+    }
+</style>
+
+
+<body>
+
+    <h1>Send a Message to try Server.</h1>
+
+    <form id="contact-form">
+        <div class="form-group">
+            <label for="senderName">Name:</label>
+            <input type="text" id="senderName">
+        </div>
+
+        <div class="form-group">
+            <label for="senderMessage">Message:</label>
+            <input type="text" id="senderMessage">
+        </div>
+
+        <button id="sendBtn">Send Message</button>
+    </form>
+
+
+    <script>
+        const form = document.getElementById(`contact-form`);
+        const nameInput = document.getElementById(`senderName`);
+        const messageTextarea = document.getElementById(`senderMessage`);
+
+        form.addEventListener(`submit`, (e) => {
+            e.preventDefault();
+
+            const name = nameInput.value;
+            const message = messageTextarea.value;
+
+            fetch(`http://localhost:3000/message`, {
+                method: `POST`,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({name, message})
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(`Response from server`, data);
+            })
+        });
+
+    </script>
+
+    <!-- 
+    <script>
+
+        const heading = document.querySelector(`h1`);
+        const button = document.querySelector(`button`);
+
+        button.addEventListener(`click`, () => {
+            fetch(`http://localhost:3000/message`)
+            .then(response => {
+                if(!response.ok) {
+                    throw new Error(`Server error: ${response.status} ${response.statusText}`);
+                }
+
+                return response.json();
+            })
+            .then(data => {
+                heading.textContent = data.text;
+            })
+            .catch(err => {
+                console.error(err);
+            })
+        });
+
+    </script> -->
+
+
+</body>
+
+</html>
