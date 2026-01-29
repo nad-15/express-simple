@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(`/products`, productsRouter);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Hello World from express!');
 });
 
 app.get('/about', (req, res) => {

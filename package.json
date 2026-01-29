@@ -4,6 +4,7 @@
   "description": "A simple Express.js backend project with basic routes and a frontend demo.   This project is perfect for practicing HTTP methods (`GET` and `POST`), CORS handling, and connecting a frontend with an Express backend.",
   "main": "products.js",
   "scripts": {
+    "dev": "nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
@@ -12,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "nodemon": "^3.1.11"
   }
 }
