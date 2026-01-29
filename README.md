@@ -64,6 +64,47 @@ node server.js
 
 ---
 
+
+## Development with Nodemon
+
+For development, this project uses **nodemon** to automatically restart the server whenever you make changes. This saves you from manually stopping and restarting the server each time.
+
+### Install nodemon
+
+Install it as a development dependency:
+
+```bash
+npm install --save-dev nodemon
+```
+
+Or install it globally on your system:
+
+```bash
+npm install -g nodemon
+```
+
+### Add scripts to `package.json`
+
+Update the `scripts` section in your `package.json`:
+
+```json
+"scripts": {
+  "start": "node server.js",
+  "dev": "nodemon server.js"
+}
+```
+
+### Run the server in development mode
+
+```bash
+npm run dev
+```
+
+Now the server will automatically restart whenever you save changes to your files.
+
+> **Note:** Nodemon is intended for development only and should not be used in production.
+
+
 ## License
 
 This project is for practice and learning purposes.
